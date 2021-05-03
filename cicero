@@ -2,8 +2,6 @@ import pygame
 import math
 import time
 
-
-pygame.init()
 win = pygame.display.set_mode((640, 480))
 pygame.display.set_caption("First Game")
 
@@ -61,7 +59,19 @@ def num_risposte_esatte():
     global risposte_esatte
     if risposte_esatte == 10:
         pygame.quit()
-   
+        
+def main():
+
+    pygame.init()
+
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    screen_rect = screen.get_rect()
+
+    clock = pygame.time.Clock()
+    is_running = False
+
+    btn1 = Button('Hello', 200, 50, 100, 50)
+    btn2 = Button('World', 200, 150, 100, 50)   
         
     
 def redrawGameWindow():
