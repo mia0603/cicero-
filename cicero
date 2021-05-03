@@ -3,43 +3,8 @@ import math
 import time
 
 win = pygame.display.set_mode((640, 480))
-pygame.display.set_caption("First Game")
 
 
-icon = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/colosseum.jpg')
-walk_r = pygame.transform.scale(icon, (30, 30))
-walkLeft = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/colosseum.jpg')
-walk_l = pygame.transform.scale(walkLeft, (30, 30))
-walkDiagonal = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/colosseum.jpg')
-walk_d = pygame.transform.scale(walkDiagonal, (30, 30))
-backg = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/cicero_map2.png')
-mapp = pygame.transform.scale(backg, (640, 480))
-char = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/colosseum.jpg')
-walk_char = pygame.transform.scale(char, (30, 30))
-
-
-
-BLUE=(0,0,255)
-GREEN = (0,255,0)
-WHITE=(255,255,255)
-RED=(255, 0, 0)
-BLACK=(0,0,0)
-
-icon_x = 360
-icon_y = 350
-
-
-clock = pygame.time.Clock()
-
-left = False
-right = False
-down = False
-
-walkCount = 0
-risposte_esatte = 0
-
-target_x = [320, 135, 185, 240, 345, 580, 555, 480, 420, 500, 530]
-target_y = [400, 330, 210, 153, 100, 110, 222, 223, 270, 347, 530] 
 
 def keep_move_mod(target_x, target_y):
     global icon_x
@@ -62,6 +27,41 @@ def num_risposte_esatte():
         
 def main():
 
+    icon = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/colosseum.jpg')
+    walk_r = pygame.transform.scale(icon, (30, 30))
+    walkLeft = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/colosseum.jpg')
+    walk_l = pygame.transform.scale(walkLeft, (30, 30))
+    walkDiagonal = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/colosseum.jpg')
+    walk_d = pygame.transform.scale(walkDiagonal, (30, 30))
+    backg = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/cicero_map2.png')
+    mapp = pygame.transform.scale(backg, (640, 480))
+    char = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/colosseum.jpg')
+    walk_char = pygame.transform.scale(char, (30, 30))
+
+
+
+    BLUE=(0,0,255)
+    GREEN = (0,255,0)
+    WHITE=(255,255,255)
+    RED=(255, 0, 0)
+    BLACK=(0,0,0)
+
+    icon_x = 360
+    icon_y = 350
+
+
+    clock = pygame.time.Clock()
+
+    left = False
+    right = False
+    down = False
+
+    walkCount = 0
+    risposte_esatte = 0
+
+    target_x = [320, 135, 185, 240, 345, 580, 555, 480, 420, 500, 530]
+    target_y = [400, 330, 210, 153, 100, 110, 222, 223, 270, 347, 530] 
+    
     pygame.init()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -71,7 +71,9 @@ def main():
     is_running = False
 
     btn1 = Button('Hello', 200, 50, 100, 50)
-    btn2 = Button('World', 200, 150, 100, 50)   
+    btn2 = Button('World', 200, 150, 100, 50) 
+    
+    pygame.display.set_caption("First Game")
         
     
 def redrawGameWindow():
