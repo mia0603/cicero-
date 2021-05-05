@@ -1,7 +1,6 @@
 import pygame
 import math
 import time
-import sys
 
 win = pygame.display.set_mode((640, 480))
 pygame.display.set_caption("First Game")
@@ -11,8 +10,6 @@ backg = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/cicero_
 mapp = pygame.transform.scale(backg, (640, 480))
 icon = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/colosseum.jpg')
 walk_icon = pygame.transform.scale(icon, (30, 30))
-text_backg = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/cicero_face.jpg')
-text_backgg = pygame.transform.scale(text_backg, (640, 480))
 
 BLUE=(0,0,255)
 GREEN = (0,255,0)
@@ -26,16 +23,16 @@ icon_y = 350
 walkCount = 0
 risposte_esatte = 0
 
-target_x = [320, 135, 185, 240, 345, 580, 555, 480, 420, 500]
-target_y = [400, 330, 210, 153, 100, 110, 222, 223, 270, 347] 
+target_x = [320, 135, 185, 240, 345, 580, 555, 480, 420, 500, 530]
+target_y = [400, 330, 210, 153, 100, 110, 222, 223, 270, 347, 530] 
     
 pygame.init()
-    
 
 def figure():
     pygame.draw.rect(mapp,BLUE,(200,150,100,50))
-   
 
+    
+   
 def keep_move_mod(target_x, target_y):
     global icon_x
     global icon_y
@@ -46,12 +43,8 @@ def keep_move_mod(target_x, target_y):
         sign_y = (target_y - icon_y)/abs(target_y - icon_y)
         icon_x += 1 * sign_x
         icon_y += abs(coef)  * sign_y
-    elif icon_x == target_x or  icon_y == target_y:
-        figure()
-        pygame.time.delay(6000)
-        risposte_esatte += 1
     else:
-        risposte_esatte += 1      
+        risposte_esatte += 1 
     
         
 def num_risposte_esatte():
@@ -62,39 +55,41 @@ def num_risposte_esatte():
 def redrawGameWindow():
     global walkCount
     win.blit(mapp, (0,0))
-    
     if walkCount + 1 >= 27:
-        walkCount = 0
+        walkCount = 0    
     else:
         win.blit(walk_icon, (icon_x,icon_y))
         walkCount = 0
         
     pygame.display.update() 
 
-
 def isCollision(icon_x, icon_y, target_x, target_y):
     distance = math.sqrt((math.pow(icon_x - target_x, 2)) + (math.pow( icon_y - target_y, 2)))
     if distance < 1:
         return True
     else:
-        return False
-    
+        return False 
             
 run = True
 
 while run:
     clock.tick(27)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 is_running = False
-    win.blit(text_backgg, (0,0))
+                
     keep_move_mod(target_x[risposte_esatte], target_y[risposte_esatte])
     collision = isCollision(icon_x, icon_y, target_x[risposte_esatte], target_y[risposte_esatte])
+    
     if collision:
         figure()
+    
+        
                                                         
     redrawGameWindow() 
 pygame.quit()
+
