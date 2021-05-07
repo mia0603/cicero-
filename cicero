@@ -1,38 +1,64 @@
+import wx
 import pygame
-import math
-import time
 
+pygame.init()
 win = pygame.display.set_mode((640, 480))
 pygame.display.set_caption("First Game")
-clock = pygame.time.Clock()
 
 backg = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/cicero_map2.png')
 mapp = pygame.transform.scale(backg, (640, 480))
 icon = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/colosseum.jpg')
 walk_icon = pygame.transform.scale(icon, (30, 30))
 
-BLUE=(0,0,255)
-GREEN = (0,255,0)
-WHITE=(255,255,255)
-RED=(255, 0, 0)
-BLACK=(0,0,0)
 
 icon_x = 360
 icon_y = 350
+
+clock = pygame.time.Clock()
 
 walkCount = 0
 risposte_esatte = 0
 
 target_x = [320, 135, 185, 240, 345, 580, 555, 480, 420, 500, 530]
-target_y = [400, 330, 210, 153, 100, 110, 222, 223, 270, 347, 530] 
-    
-pygame.init()
+target_y = [400, 330, 210, 153, 100, 110, 222, 223, 270, 347, 530]
 
-def figure():
-    pygame.draw.rect(mapp,BLUE,(200,150,100,50))
+class Domande(wx.Frame):
 
-    
-   
+    def __init__(self):
+        super().__init__(None, title="Seleziona una opzione")
+        pannello = wx.Panel(self)
+        
+        self.testo = wx.StaticText(pannello, label="Chi era Cicerone?", pos=(5,6))
+        self.rbM = wx.RadioButton(pannello, label="Maschio", style=wx.RB_GROUP, pos=(5,35))
+        self.rbF = wx.RadioButton(pannello, label="Femmina", pos=(5,65))
+        self.rbC = wx.RadioButton(pannello, label="boh", pos=(5,95))
+        self.rbD = wx.RadioButton(pannello, label="can", pos=(5,125))
+        self.texto = wx.StaticText(pannello, label="", pos=(5,155))
+        
+
+        self.rbM.Bind(wx.EVT_RADIOBUTTON, self.domande)
+        self.rbF.Bind(wx.EVT_RADIOBUTTON, self.domande)
+        self.rbC.Bind(wx.EVT_RADIOBUTTON, self.domande)
+        self.rbD.Bind(wx.EVT_RADIOBUTTON, self.domande)  
+
+    def domande(self, event):
+        if self.rbD.GetValue():
+            print(self.texto.SetLabel('Right!'))
+        else:
+            print(self.texto.SetLabel('no!'))
+        return
+
+
+#def CheckChoice():
+  #          if self.rbD.GetValue() == True:
+   #             global risposte_esatte
+    #            global window
+     #           risposte_esatte += 1
+      #          wx.window.Destroy()
+       #         wx.window.Close()
+        #    else:
+         #       Domande()             
+                    
 def keep_move_mod(target_x, target_y):
     global icon_x
     global icon_y
@@ -44,14 +70,13 @@ def keep_move_mod(target_x, target_y):
         icon_x += 1 * sign_x
         icon_y += abs(coef)  * sign_y
     else:
-        risposte_esatte += 1 
-    
-        
-def num_risposte_esatte():
-    global risposte_esatte
-    if risposte_esatte == 10:
-        pygame.quit()       
-        
+        app = wx.App()
+        for val in Domande():
+            Frame = Domande(parent=None, id=-1)
+            Frame.Show()
+            app.MainLoop()
+        #CheckChoice()
+                
 def redrawGameWindow():
     global walkCount
     win.blit(mapp, (0,0))
@@ -63,12 +88,6 @@ def redrawGameWindow():
         
     pygame.display.update() 
 
-def isCollision(icon_x, icon_y, target_x, target_y):
-    distance = math.sqrt((math.pow(icon_x - target_x, 2)) + (math.pow( icon_y - target_y, 2)))
-    if distance < 1:
-        return True
-    else:
-        return False 
             
 run = True
 
@@ -76,20 +95,16 @@ while run:
     clock.tick(27)
 
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT or event.type == pygame.K_ESCAPE:
             run = False
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
-                is_running = False
-                
+            
     keep_move_mod(target_x[risposte_esatte], target_y[risposte_esatte])
-    collision = isCollision(icon_x, icon_y, target_x[risposte_esatte], target_y[risposte_esatte])
-    
-    if collision:
-        figure()
-    
+
+    if risposte_esatte == 10:
         
+        win.blit(walk_char, (icon_x,icon_y))
+        walkCount = 0
+        break   
                                                         
     redrawGameWindow() 
 pygame.quit()
-
