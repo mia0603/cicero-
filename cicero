@@ -50,14 +50,14 @@ class Domande(wx.Frame):
 
 
 #def CheckChoice():
-  #          if self.rbD.GetValue() == True:
-   #             global risposte_esatte
-    #            global window
-     #           risposte_esatte += 1
-      #          wx.window.Destroy()
-       #         wx.window.Close()
-        #    else:
-         #       Domande()             
+            if self.rbD.GetValue() == True:
+                global risposte_esatte
+                global window
+                risposte_esatte += 1
+                wx.window.Destroy()
+                wx.window.Close()
+            else:
+                Domande()             
                     
 def keep_move_mod(target_x, target_y):
     global icon_x
@@ -75,7 +75,7 @@ def keep_move_mod(target_x, target_y):
             Frame = Domande(parent=None, id=-1)
             Frame.Show()
             app.MainLoop()
-        #CheckChoice()
+            CheckChoice()
                 
 def redrawGameWindow():
     global walkCount
