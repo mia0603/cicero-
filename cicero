@@ -5,7 +5,7 @@ pygame.init()
 win = pygame.display.set_mode((640, 480))
 pygame.display.set_caption("First Game")
 
-backg = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/cicero_map2.png')
+backg = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/cicero_map3.png')
 mapp = pygame.transform.scale(backg, (640, 480))
 icon = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/colosseum.jpg')
 walk_icon = pygame.transform.scale(icon, (30, 30))
