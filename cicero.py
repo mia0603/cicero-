@@ -3,9 +3,9 @@ import pygame
 
 pygame.init()
 
-backg = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/cicero_map3.png')
+backg = pygame.image.load('cicero_map3.png')
 mapp = pygame.transform.scale(backg, (640, 480))
-icon = pygame.image.load('/Users/miagalante/Desktop/cicero_game /Codice/colosseum.jpg')
+icon = pygame.image.load('colosseum.jpg')
 walk_icon = pygame.transform.scale(icon, (30, 30))
 
 width = 640
@@ -30,42 +30,45 @@ risposte_esatte = 0
 target_x = [379, 355, 320, 285, 230, 200, 255, 298, 356, 425, 535, 580, 584, 575, 565, 514, 473, 430, 460, 485, 500]
 target_y = [355, 385, 400, 347, 290, 195, 165, 135, 100, 102, 103, 90, 115, 168, 210, 241, 244, 260, 310, 335, 345]
 
-##class Domande(wx.Frame):
-##
-##    def __init__(self):
-##        super().__init__(None, title="Seleziona una opzione")
-##        pannello = wx.Panel(self)
-##        
-##        self.testo = wx.StaticText(pannello, label="Chi era Cicerone?", pos=(5,6))
-##        self.rbM = wx.RadioButton(pannello, label="Maschio", style=wx.RB_GROUP, pos=(5,35))
-##        self.rbF = wx.RadioButton(pannello, label="Femmina", pos=(5,65))
-##        self.rbC = wx.RadioButton(pannello, label="boh", pos=(5,95))
-##        self.rbD = wx.RadioButton(pannello, label="can", pos=(5,125))
-##        self.texto = wx.StaticText(pannello, label="", pos=(5,155))
-##        
-##
-##        self.rbM.Bind(wx.EVT_RADIOBUTTON, self.domande)
-##        self.rbF.Bind(wx.EVT_RADIOBUTTON, self.domande)
-##        self.rbC.Bind(wx.EVT_RADIOBUTTON, self.domande)
-##        self.rbD.Bind(wx.EVT_RADIOBUTTON, self.domande)  
-##
-##    def domande(self, event):
-##        if self.rbD.GetValue():
-##            print(self.texto.SetLabel('Right!'))
-##        else:
-##            print(self.texto.SetLabel('no!'))
-##        return
-##
-##
-##def CheckChoice():
-##            if self.rbD.GetValue() == True:
-##                global risposte_esatte
-##                global window
-##                risposte_esatte += 1
-##                wx.window.Destroy()
-##                wx.window.Close()
-##            else:
-##                Domande()             
+## Schema dati
+### [Domanda, [opzioni], risposta]
+data = [["Chi era Cicerone?", ["Maschio", "Femmina", "Porco", "Teiera"], "Teiera"],
+		["Chi era il padre di Cicerone?", ["Un Vagabondo", "Femmina", "Porco", "Teiera"], "Un Vagabondo"],
+		["Chi era il padre di Cicerone?", ["Un Vagabondo", "Femmina", "Porco", "Teiera"], "Un Vagabondo"]]
+
+class Domande(wx.Frame):
+
+    def __init__(self, data):
+        super().__init__(None, title="Seleziona una opzione")
+        pannello = wx.Panel(self)
+        
+        self.domanda = data[0]
+        self.opzioni = data[1]
+        self.risposta = data[2]
+        self.corretto = 0
+		
+        self.testo = wx.StaticText(pannello, label= self.domanda, pos=(5,10))
+        self.rbox = wx.RadioBox(pannello, pos = (5,80), choices = self.opzioni ,
+								   majorDimension = 1, style = wx.RA_SPECIFY_ROWS)
+		
+        self.texto = wx.StaticText(pannello, label="", pos=(5,200))
+         
+        self.rbox.Bind(wx.EVT_RADIOBOX, self.domande)
+		
+    def domande(self, e):
+        if self.rbox.GetStringSelection() == self.risposta:
+            print(self.texto.SetLabel('Corretto! Chiudi la finestra per continuare.'))
+            self.corretto = 1
+        else:
+            print(self.texto.SetLabel('Sbagliato!'))
+        
+
+
+def CheckChoice(Frame):
+            if Frame.corretto == 1:
+                global risposte_esatte
+                risposte_esatte += 1
+         
                     
 def keep_move_mod(target_x, target_y):
     global icon_x
@@ -78,12 +81,11 @@ def keep_move_mod(target_x, target_y):
         icon_x += 1 * sign_x
         icon_y += abs(coef)  * sign_y
     else:
-        risposte_esatte += 1
-##        app = wx.App()
-##        Frame = Domande(parent=None, id=-1)
-##        Frame.Show()
-##        app.MainLoop()
-##        CheckChoice()
+        app = wx.App()
+        Frame = Domande(data[risposte_esatte])
+        Frame.Show()
+        app.MainLoop()
+        CheckChoice(Frame)
 
                 
 def redrawGameWindow():
