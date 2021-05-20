@@ -34,6 +34,7 @@ target_y = [355, 385, 400, 347, 290, 195, 165, 135, 100, 102, 103, 90, 115, 168,
 ### [Domanda, [opzioni], risposta]
 data = [["Chi era Marco Tullio Cicerone?", ["Risposte :  ","Politico e filosofo greco", "Politico e filosofo latino", "Commerciante siciliano"], "Politico e filosofo latino"],
 		["Dove è nato Marco Tullio Cicerone?", ["Risposte :  ", "Tuscoli           ", "Arpino           ", "Roma                "], "Arpino           "],
+### 3 domande   [["Chi incontra M. Cicerone appena sbarcato a Brindisi dopo l'esilio?", ["Risposte :  ", "Tagliandosi le vene", "Bevendo della cicuta", "Di vecchiaia"], "Bevendo della cicuta"], ["Come muore ", ["Risposte :  ", "Tagliandosi le vene", "Bevendo della cicuta", "Di vecchiaia"], "Bevendo della cicuta"], [" M. Cicerone?", ["Risposte :  ", "Tagliandosi le vene", "Bevendo della cicuta", "Di vecchiaia"], "Bevendo della cicuta"]],
 		["Come muore il cugino Lucio di M. Cicerone?", ["Risposte :  ", "Tagliandosi le vene", "Bevendo della cicuta", "Di vecchiaia"], "Bevendo della cicuta"],
                 ["Chi era soprannominato 'il maestro di ballo' ?", ["Risposte :  ", "Catone", "Pompeo                      ", "Ortensio"], "Ortensio"],
                 ["Chi era Gaio Licinio Verre?", ["Risposte :  ", "Famoso avvocato di Roma", "Governatore della Sicilia", "Coraggioso gladiatore macedone"], "Governatore della Sicilia"],
@@ -166,4 +167,6 @@ while run:
                                                         
     redrawGameWindow() 
 pygame.quit()
+
+
 
