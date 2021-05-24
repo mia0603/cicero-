@@ -148,6 +148,8 @@ def CheckChoice(Frame):
          risposte_esatte += 1
       if Frame.sbagliato == 1:
           risposte_esatte -= 1
+          if risposte_esatte_s == 3:
+			          risposte_esatte_s = 0
           
          
 def CheckChoice2(Frame):
